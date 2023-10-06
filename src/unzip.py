@@ -53,7 +53,7 @@ class GzFileExtract:
             if os.path.isfile(os.path.join(stationpath, files))
         ]
 
-        Nfiles = min(random_files, N)
+        Nfiles = min(len(random_files), N)
 
         random.seed(10)
 

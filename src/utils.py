@@ -20,6 +20,3 @@ def unzip_file(input_file_path, output_dir):
             shutil.copyfileobj(f_in, f_out)
 
     return output_file_path
-
-def extract_station_data(filepath):
-    pass
