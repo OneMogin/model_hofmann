@@ -2,3 +2,5 @@ pandas==2.1.1
 matplotlib==3.8.0
 python-dotenv==1.0.0
 numpy==1.26.0
+pvlib==0.10.2
+timezonefinder==6.2.0
