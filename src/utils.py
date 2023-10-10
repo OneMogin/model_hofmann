@@ -1,6 +1,7 @@
 import gzip
 import os
 import shutil
+import numpy as np
 
 
 def unzip_file(input_file_path, output_dir):

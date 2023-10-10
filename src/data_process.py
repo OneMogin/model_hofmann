@@ -78,7 +78,9 @@ def load_one_month_data(dirpath):
                             num for num in " ".join([irr_data[-1], line]).split()
                         ]
             irr_data = pd.DataFrame(irr_data)
-            irr_data = irr_data.replace(to_replace=["-999", "-99.9"], value=np.nan).astype(float)
+            irr_data = irr_data.replace(
+                to_replace=["-999", "-99.9"], value=np.nan
+            ).astype(float)
             irr_data.columns = data_columns
             irr_data.index = (
                 start_date
@@ -86,8 +88,10 @@ def load_one_month_data(dirpath):
                 + pd.to_timedelta(irr_data["minute"], unit="m")
             )
             tf = TimezoneFinder()
-            tz = tf.timezone_at(lng=metadata['longitude'], lat=metadata['latitude']) 
-            irr_data['local time'] = irr_data.index.tz_convert(tz)
+            tz = tf.timezone_at(lng=metadata["longitude"], lat=metadata["latitude"])
+            metadata["local tz"] = tz
+            irr_data["local time"] = irr_data.index.tz_convert(tz)
+            irr_data["local time"] = pd.DatetimeIndex(irr_data["local time"])
             irr_data = irr_data.drop(["day", "minute"], axis=1)
     except FileNotFoundError as e:
         print(f"An error ocurred while opening file: {e}")
@@ -100,4 +104,4 @@ if __name__ == "__main__":
     load_dotenv()
     RAW_DATAPATH = os.environ.get("RAW_DATAPATH")
     irradiance, metadata = load_one_month_data(RAW_DATAPATH)
-    print(irradiance['local time'])
+    print(irradiance["local time"])
